@@ -21,6 +21,8 @@
  */
 package org.owasp.webgoat.webwolf;
 
+package org.springframework.security.crypto.bcrypt;
+
 import lombok.AllArgsConstructor;
 import org.owasp.webgoat.webwolf.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
