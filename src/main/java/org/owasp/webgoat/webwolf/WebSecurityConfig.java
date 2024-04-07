@@ -20,7 +20,7 @@
  * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects.
  */
 package org.owasp.webgoat.webwolf;
-package org.springframework.security.crypto.bcrypt;
+
 
 import lombok.AllArgsConstructor;
 import org.owasp.webgoat.webwolf.user.UserService;
@@ -36,6 +36,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /** Security configuration for WebGoat. */
 @Configuration
@@ -63,13 +64,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     security.and().logout().permitAll();
   }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
-      auth.jdbcAuthentication()
-        .dataSource(dataSource)
-        .usersByUsernameQuery("SELECT * FROM users WHERE username = ?")
-        .passwordEncoder(new BCryptPasswordEncoder());
-    }
+@Autowired
+public void configureGlobal(AuthenticationManagerBuilder auth, DataSource dataSource) throws Exception {
+  auth.jdbcAuthentication()
+    .dataSource(dataSource)
+    .usersByUsernameQuery("SELECT * FROM users WHERE username = ?")
+    .passwordEncoder(new BCryptPasswordEncoder());
+}
 
   @Bean
   @Override
